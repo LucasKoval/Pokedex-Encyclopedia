@@ -1,6 +1,7 @@
 import React from 'react';
+import Link from 'next/link'
 
-const Pagination = props => {
+const Pagination = (props) => {
     return (
         <ul className="nav nav-pills justify-content-between" >
           
@@ -11,7 +12,11 @@ const Pagination = props => {
                         <li className="page-item prev-button-low">
                             <button className="page-button bg-chillyellow zoom-in border-0 previous mt-2" aria-label="Previous">
                                 <span aria-hidden="true" style={{paddingLeft: '2px', paddingRight: '2px'}}> 
-                                    <img src="/static/icons/a-prev.png" alt="Preview" border="0" />
+                                    <Link href='/'>
+                                        <a className="nav-link bg-lightgrey p-4 rounded-1">
+                                            <img src="/static/icons/a-prev.png" alt="Preview" border="0" />
+                                        </a>
+                                    </Link>
                                 </span>
                             </button>
                         </li>
@@ -29,7 +34,11 @@ const Pagination = props => {
                         <li className="page-item ms-2">
                             <button className="page-button bg-chillyellow zoom-in border-0 next mt-2" aria-label="Next">
                                 <span aria-hidden="true" style={{paddingLeft: '2px', paddingRight: '2px'}}>
-                                    <img src="/static/icons/a-next.png" alt="Next" border="0" />
+                                    <Link href='/'>
+                                        <a className="nav-link bg-lightgrey p-4 rounded-1">
+                                            <img src="/static/icons/a-next.png" alt="Next" border="0" />
+                                        </a>
+                                    </Link>
                                 </span>
                             </button>
                         </li>
