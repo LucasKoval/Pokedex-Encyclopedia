@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { 
   BASE_API_POKEMON,
   BASE_API_PRODUCTS_IMAGE
 } from '../pages/api/baseURL';
-import useFetch from '../pages/api/useFetch';
+import useFetchOne from './api/useFetchOne';
+import useFetchAll from '../pages/api/useFetchAll';
 import Loader from '../assets/Loader';
 import Layout from '../components/Layout'
 import Card from '../components/Card'
@@ -12,11 +13,10 @@ import Pagination from '../assets/Pagination'
 
 
 export default function Home() {
-  const { data, loading, error } = useFetch(BASE_API_POKEMON, []); /* +'?limit=151' */
+  const { data, pokemons, loading, error, page, previousPage, nextPage } = useFetchAll(BASE_API_POKEMON, []);
   if (loading) return <Loader />;
   if (error) return "Error!";
-  const pokemons = data.results;
-
+  
   return (
     <div className="bg-chillyellow">
       
@@ -45,7 +45,7 @@ export default function Home() {
           }
         </div>
 
-        <Pagination />
+        <Pagination page={ page } preview={ previousPage } next={ nextPage } />
 
       </Layout>
 

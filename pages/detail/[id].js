@@ -1,12 +1,29 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link'
-import Layout from '../components/Layout'
-import DetailCard from '../components/DetailCard'
-import Pagination from '../assets/Pagination'
+import { useRouter } from 'next/router'
+import { 
+    BASE_API_POKEMON,
+    BASE_API_PRODUCTS_IMAGE
+} from '../../pages/api/baseURL';
+import Loader from '../../assets/Loader';
+import Layout from '../../components/Layout'
+import DetailCard from '../../components/DetailCard'
+import Pagination from '../../assets/Pagination'
+import useFetchAll from '../api/useFetchAll';
 
 
-export default function Detail() {
+export default function Detail(props) {
+    const router = useRouter()
+    const id = router.query.id
+    const { data, pokemons, loading, error, page, previousPage, nextPage } = useFetchAll(BASE_API_POKEMON, []);
+    if (loading) return <Loader />;
+    if (error) return "Error!";
+
+    const pokemon = pokemons.filter(pokemon => {
+        return pokemon.url == `https://pokeapi.co/api/v2/pokemon/${id}/`
+    })
+
     return (
         <div className="bg-chillyellow">
             <Head>
@@ -34,7 +51,7 @@ export default function Detail() {
                 </div>
 
                 <div className="d-flex justify-content-center">
-                    <DetailCard />                      
+                    <DetailCard url={ pokemon[0].url }/>                      
                 </div>
 
             </Layout>
