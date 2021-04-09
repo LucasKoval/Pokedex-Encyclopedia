@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import apiCall from './apiCall';
+import apiCall from '../utils/apiCall';
 
 const useFetchOne = (BASE_API_URL, defaultValue) => {
     const [dataPK, setdataPK] = useState(defaultValue);

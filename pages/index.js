@@ -3,13 +3,13 @@ import Head from 'next/head';
 import { 
   BASE_API_POKEMON,
   BASE_API_PRODUCTS_IMAGE
-} from '../pages/api/baseURL';
-import useFetchOne from './api/useFetchOne';
-import useFetchAll from '../pages/api/useFetchAll';
-import Loader from '../assets/Loader';
+} from '../config/baseURL';
+import useFetchOne from '../hooks/useFetchOne';
+import useFetchAll from '../hooks/useFetchAll';
+import Loader from '../components/Loader';
 import Layout from '../components/Layout'
 import Card from '../components/Card'
-import Pagination from '../assets/Pagination'
+import Pagination from '../components/Pagination'
 
 
 export default function Home() {

@@ -1,10 +1,8 @@
 import React from 'react';
 import { useRouter } from 'next/router'
-import { 
-    BASE_API_PRODUCTS_IMAGE
-} from '../pages/api/baseURL';
-import Loader from '../assets/Loader';
-import useFetchOne from '../pages/api/useFetchOne';
+import { BASE_API_PRODUCTS_IMAGE } from '../config/baseURL';
+import Loader from '../components/Loader';
+import useFetchOne from '../hooks/useFetchOne';
 
 const DetailCard = (props) => {
     const router = useRouter()

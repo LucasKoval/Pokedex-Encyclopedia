@@ -5,12 +5,12 @@ import { useRouter } from 'next/router'
 import { 
     BASE_API_POKEMON,
     BASE_API_PRODUCTS_IMAGE
-} from '../../pages/api/baseURL';
-import Loader from '../../assets/Loader';
+} from '../../config/baseURL';
+import Loader from '../../components/Loader';
 import Layout from '../../components/Layout'
 import DetailCard from '../../components/DetailCard'
-import Pagination from '../../assets/Pagination'
-import useFetchAll from '../api/useFetchAll';
+import Pagination from '../../components/Pagination'
+import useFetchAll from '../../hooks/useFetchAll';
 
 
 export default function Detail(props) {
