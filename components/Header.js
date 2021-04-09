@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link'
-import Search from '../assets/Search';
+import Search from '../components/Search';
 
 const Header = () => {
     return (

@@ -2,7 +2,7 @@
 
 ## `APP URL:`
 
-https://
+[https://pokedex-challenge-lkdev.vercel.app/](https://pokedex-challenge-lkdev.vercel.app/)
 
 ## `Available Scripts`
 
