@@ -1,0 +1,77 @@
+/*====================/
+  GLOBAL RULES
+/====================*/
+:root {
+  --primary: #0d6efd;
+  --secondary: #6c757d;
+  --success: #198754;
+  --info: #0dcaf0;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #212529;
+  --pale: #efe8df;
+  --chillred: #de4441;
+  --chillblue: #2b84a7;
+  --chillyellow: #fee8b7;
+  --fire: #ff7800;
+}
+
+main {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*=== General ===*/
+.bg-lightgrey {
+  background-color: lightgrey;
+}
+.bg-pale {
+  background-color: var(--pale);
+}
+.bg-chillred {
+  background-color: var(--chillred);
+}
+.bg-chillblue {
+  background-color: var(--chillblue);
+}
+.bg-chillyellow {
+  background-color: var(--chillyellow);
+}
+.bg-fire {
+  background-color: var(--fire);
+}
+
+.flip:hover {
+  transform: scaleX(-1);
+}
+
+.zoom-in:hover {
+  transform: scale(1.1);
+}
+
+.border-groove {
+  border: groove 4px var(--secondary);
+}
+
+.poke-button {
+  background-color: #ffcd00;
+  border: solid 5px #356abc;
+}
+
+.poke-card {
+  transform: translateY(0px);
+  transition: 0.6s;
+  -webkit-transition: 0.6s;
+}
+.poke-card:hover {
+  transform: translateY(-17px);
+  transition: 0.4s;
+  box-shadow: 0 8px 10px rgba(108, 117, 125, 0.7) !important;
+  -webkit-transition: 0.4s;
+}
+
+.start-13 {
+  left: 13% !important;
+}

@@ -1,12 +1,25 @@
 import React from 'react';
 import Head from 'next/head';
-import Link from 'next/link'
-import Image from 'next/image'
+import { 
+  BASE_API_POKEMON,
+  BASE_API_PRODUCTS_IMAGE
+} from '../pages/api/baseURL';
+import useFetch from '../pages/api/useFetch';
+import Loader from '../assets/Loader';
 import Layout from '../components/Layout'
+import Card from '../components/Card'
+import Pagination from '../assets/Pagination'
+
 
 export default function Home() {
+  const { data, loading, error } = useFetch(BASE_API_POKEMON, []); /* +'?limit=151' */
+  if (loading) return <Loader />;
+  if (error) return "Error!";
+  const pokemons = data.results;
+
   return (
-    <div>
+    <div className="bg-chillyellow">
+      
       <Head>
         <title>Pokedex Challenge</title>
         <link rel="icon" href="/static/icons/pokeball-2.png" />
@@ -15,16 +28,26 @@ export default function Home() {
       </Head>
 
       <Layout>
-        <h1 className="title">Home</h1>
-      
-        <h3>
-          <Link href="/detail">
-            <a>To detail</a>
-          </Link>
-        </h3>
+
+        <Pagination>
+          <h1 className="title text-center mb-4">
+            <img src="https://fontmeme.com/permalink/210408/cb4df7d3269ce2ac42c1a819824138d4.png" alt="Home" border="0"/ >
+          </h1>
+        </Pagination>
+
+        <div className="d-flex flex-wrap justify-content-evenly" id="list">
+          { 
+            pokemons.map((pokemon, index) => {
+              return (
+                <Card key={index} name={ pokemon.name } image={`${BASE_API_PRODUCTS_IMAGE}${index+1}.png`} detail={ pokemon.url } id={ index+1 } />
+              )
+            })
+          }
+        </div>
+
+        <Pagination />
+
       </Layout>
-      
-      
 
     </div>
   )

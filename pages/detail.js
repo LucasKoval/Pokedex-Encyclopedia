@@ -1,13 +1,14 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link'
-import Image from 'next/image'
 import Layout from '../components/Layout'
-import { Carousel } from 'react-bootstrap'
+import DetailCard from '../components/DetailCard'
+import Pagination from '../assets/Pagination'
+
 
 export default function Detail() {
     return (
-        <div>
+        <div className="bg-chillyellow">
             <Head>
                 <title>Pokedex Challenge</title>
                 <link rel="icon" href="/static/icons/pokeball-2.png" />
@@ -17,45 +18,25 @@ export default function Detail() {
             </Head>
             
             <Layout>
-                <h1>Detail</h1>
 
-                <h3>
+                <Pagination>
+                    <h1 className="title text-center mb-3">
+                        <img src="https://fontmeme.com/permalink/210408/7c0325945d8350a0ed0187b3db446e0b.png" alt="Detail" border="0" />
+                    </h1>
+                </Pagination>
+
+                <div className="d-flex justify-content-center mb-3">
                     <Link href="/">
-                        <a>Back to Home</a>
-                    </Link>
-                </h3>
+                        <a className="nav-link">
+                            <button className="btn poke-button fw-bold">Return</button> 
+                        </a>
+                    </Link>                  
+                </div>
 
-                <Carousel>
-                    <Carousel.Item>
-                        <div className="d-flex justify-content-center">
-                            <img className="d-flex w-25 justify-content-center" src="/static/img/001.png" alt="First slide" />
-                            <Carousel.Caption>
-                                <h3>First slide label</h3>
-                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                            </Carousel.Caption>   
-                        </div>
-                    </Carousel.Item>
-                    
-                    <Carousel.Item>
-                        <div className="d-flex justify-content-center">
-                            <img className="d-flex w-25 justify-content-center" src="/static/img/002.png" alt="First slide" />
-                            <Carousel.Caption>
-                                <h3>First slide label</h3>
-                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                            </Carousel.Caption>   
-                        </div>
-                    </Carousel.Item>
+                <div className="d-flex justify-content-center">
+                    <DetailCard />                      
+                </div>
 
-                    <Carousel.Item>
-                        <div className="d-flex justify-content-center">
-                            <img className="d-flex w-25 justify-content-center" src="/static/img/003.png" alt="First slide" />
-                            <Carousel.Caption>
-                                <h3>First slide label</h3>
-                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                            </Carousel.Caption>   
-                        </div>
-                    </Carousel.Item>
-                </Carousel>
             </Layout>
 
         </div>
