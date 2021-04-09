@@ -37,7 +37,7 @@ export default function Detail(props) {
             <Layout>
 
                 <Pagination>
-                    <h1 className="title text-center mb-3">
+                    <h1 className="title text-center align-self-center">
                         <img src="https://fontmeme.com/permalink/210408/7c0325945d8350a0ed0187b3db446e0b.png" alt="Detail" border="0" />
                     </h1>
                 </Pagination>
