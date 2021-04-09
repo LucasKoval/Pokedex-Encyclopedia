@@ -30,7 +30,7 @@ export default function Home() {
       <Layout>
 
         <Pagination>
-          <h1 className="title text-center mb-4">
+          <h1 className="title text-center align-self-center">
             <img src="https://fontmeme.com/permalink/210408/cb4df7d3269ce2ac42c1a819824138d4.png" alt="Home" border="0"/ >
           </h1>
         </Pagination>
