@@ -1,29 +1,30 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router'
+import { BASE_API_URL, query } from '../config/baseURL';
 import apiCall from '../utils/apiCall';
 
-const useFetchOne = (BASE_API_URL, defaultValue) => {
-    const [dataPK, setdataPK] = useState(defaultValue);
-    const [loadingPK, setloadingPK] = useState(true);
-    const [errorPK, setErrorPK] = useState(null);
-   
+const useFetchOne = () => {
+    const [dataPkm, setDataPkm] = useState([]);
+    const [loadingPkm, setLoadingPkm] = useState(true);
+    const [errorPkm, setErrorPkm] = useState(null);
+    const router = useRouter()
+    const id = router.query.id
+
     useEffect(() => {
-        apiCall(BASE_API_URL)
+        apiCall(`${BASE_API_URL}${query.pokemon}/${id}`)
         .then(response => {
-            setdataPK(response.data)
+            setDataPkm(response.data)
         })
         .catch(error => {
-            console.error("Error fetching api data: ", error);
-            setErrorPK(error);
+            console.error("Error fetching the pokemon data: ", error);
+            setErrorPkm(error);
         })
         .finally(() => {
-            setloadingPK(false);
+            setLoadingPkm(false);
           })
     }, []);
 
-    return { dataPK, loadingPK, errorPK };
+    return { dataPkm, loadingPkm, errorPkm };
 }
 
 export default useFetchOne;
-
-
-/* pokemon[0].url */

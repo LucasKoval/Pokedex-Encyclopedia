@@ -18,11 +18,31 @@
 
 main {
   width: 80%;
+  box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
 }
 
 /*=== General ===*/
+.border-groove {
+  border: groove 4px var(--secondary);
+}
+
+.poke-button {
+  background-color: #ffcd00;
+  border: solid 5px #356abc;
+}
+
+.poke-size {
+  width: 296px;
+  height: 296px;
+}
+
+.max-size {
+  max-width: 948px;
+}
+
+/*=== Colors ===*/
 .bg-lightgrey {
   background-color: lightgrey;
 }
@@ -33,7 +53,7 @@ main {
   background-color: var(--chillred);
 }
 .bg-chillblue {
-  background-color: var(--chillblue);
+  background-color: var(--chillred);
 }
 .bg-chillyellow {
   background-color: var(--chillyellow);
@@ -42,21 +62,13 @@ main {
   background-color: var(--fire);
 }
 
-.flip:hover {
-  transform: scaleX(-1);
-}
-
+/*=== Effects ===*/
 .zoom-in:hover {
   transform: scale(1.1);
 }
 
-.border-groove {
-  border: groove 4px var(--secondary);
-}
-
-.poke-button {
-  background-color: #ffcd00;
-  border: solid 5px #356abc;
+.flip:hover {
+  transform: scaleX(-1);
 }
 
 .poke-card {
@@ -69,8 +81,4 @@ main {
   transition: 0.4s;
   box-shadow: 0 8px 10px rgba(108, 117, 125, 0.7) !important;
   -webkit-transition: 0.4s;
-}
-
-.start-13 {
-  left: 13% !important;
 }
