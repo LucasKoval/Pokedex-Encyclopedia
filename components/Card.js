@@ -12,8 +12,8 @@ const Card = props => {
             </Link>
 
             <div className="card-body bg-light">
-                <h5 className="card-title text-center">{ props.name }</h5>
-                <p className="card-text text-center">#0{ props.id }</p>
+                <h5 className="card-title text-center text-capitalize">{ props.name }</h5>
+                <p className="card-text text-center">#{ props.id }</p>
             </div>
 
         </div>

@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link'
-import Search from '../components/Search';
+import { Form, Button } from 'react-bootstrap';
 
-const Header = () => {
+const Header = (props) => {
+    const [search, setSearch] = useState('');
+
+
     return (
         <header>
             
@@ -14,17 +17,21 @@ const Header = () => {
                     </a>
                 </Link> 
 
-                <Search />
+                <Form className="d-inline-flex align-items-center">
 
-                {/* <ul className="navbar-nav ml-auto">
-                    <div className="topbar-divider d-none d-sm-block"></div>
-                    <li className="nav-item">
-                        <a className="nav-link text-white" id="userDropdown">
-                            <span className="me-2 d-none d-lg-inline text-gray-600 fw-bold medium">Lucas Koval</span>
-                            <img className="img-profile rounded-circle" src="/static/img/avatar.jpg" style={{width: '3rem', height: '3rem'}} />
-                        </a>
-                    </li>
-                </ul> */}
+                    <Form.Control
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder="Search Pokemon"
+                    />
+
+                    {/* <span>
+                        <input type="text" name="search" className="form-control align-middle" placeholder="Search Pokemon" />
+                    </span> */}
+                    
+                    <Button block onClick={(e) => props.getPokemon(search)} className="btn poke-button"><i className="fas fa-search"></i></Button>            
+
+                </Form>
+
                 <ul></ul>
                  
             </nav>
@@ -38,3 +45,33 @@ const Header = () => {
 }
 
 export default Header;
+
+/*
+
+search: async (req, res) => {
+    try {
+        const search = req.query.search.toLowerCase();
+    
+        const products = await db.Product.findAll({
+            include: [{
+                all: true,
+                nested: true
+            }],
+            order: [
+                ['id']
+            ],
+            group: ['model.id']
+        });
+
+        const productFound = products.filter(product => {
+            return product.model.category.name.toLowerCase().includes(search) || product.model.name.toLowerCase().includes(search) || product.model.color.name.toLowerCase().includes(search);
+        });
+
+        res.render('products/searchResults', { productFound	});
+
+    }catch (error) {
+        console.log(`ERROR: ${error}`);
+    }
+}
+
+*/

@@ -1,25 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { BASE_API_URL, query } from '../config/baseURL';
 import apiCall from '../utils/apiCall';
 
-const useFetchAll = (BASE_API_URL, defaultValue) => {
-    const [data, setData] = useState(defaultValue);
+const useFetchAll = () => {
     const [pokemons, setPokemons] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [page, setPage] = useState(1);
-    const [previousPage, setPreviousPage] = useState(null);
-    const [nextPage, setNextPage] = useState(null);
    
     useEffect(() => {
-        apiCall(BASE_API_URL + "?page=" + page)
+        apiCall(`${BASE_API_URL}${query.pokemon}/${query.all}`)
         .then(response => {
-            setData(response.data)
             setPokemons(response.data.results)
-            setPreviousPage(response.data.previous)
-            setNextPage(response.data.next)
         })
         .catch(error => {
-            console.error("Error fetching api data: ", error);
+            console.error("Error fetching all pokemons: ", error);
             setError(error);
         })
         .finally(() => {
@@ -27,10 +21,7 @@ const useFetchAll = (BASE_API_URL, defaultValue) => {
           })
     }, []);
 
-    return { data, pokemons, loading, error, page, previousPage, nextPage };
+    return { pokemons, loading, error };
 }
 
 export default useFetchAll;
-
-
-/* BASE_API_POKEMON */

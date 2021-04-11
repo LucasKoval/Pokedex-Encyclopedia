@@ -4,9 +4,9 @@ const Footer = () => {
     return (
         <footer className="shadow-lg">
 
-            <nav className="navbar py-5 mt-5 bg-chillblue text-white justify-content-around">
+            <nav className="navbar py-4 mt-5 bg-chillblue text-white justify-content-around">
 
-                <div className="flip">
+                <div className="flip py-3">
                     <img src="/static/img/pika.png" alt="Pokemon" style={{width: '130px'}} />
                 </div>
                 
@@ -36,7 +36,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="flip">
+                <div className="flip py-2">
                     <img src="/static/img/psy.png" alt="Pokemon" style={{width: '120px'}} />
                 </div>
 

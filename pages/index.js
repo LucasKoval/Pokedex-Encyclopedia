@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import { 
-  BASE_API_POKEMON,
-  BASE_API_PRODUCTS_IMAGE
-} from '../config/baseURL';
-import useFetchOne from '../hooks/useFetchOne';
+import { POKEMON_IMAGE_URL } from '../config/baseURL';
 import useFetchAll from '../hooks/useFetchAll';
+import searchPokemon from '../utils/searchPokemon';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import Loader from '../components/Loader';
-import Layout from '../components/Layout'
 import Card from '../components/Card'
-import Pagination from '../components/Pagination'
-
 
 export default function Home() {
-  const { data, pokemons, loading, error, page, previousPage, nextPage } = useFetchAll(BASE_API_POKEMON, []);
+  const [pokemonFound, setPokemonFound] = useState();
+  const [loadingSearch, setLoadingSearch] = useState(false);
+  const { pokemons, loading, error } = useFetchAll();
   if (loading) return <Loader />;
   if (error) return "Error!";
+
+  const getPokemon = async (query) => {
+    setLoadingSearch(true);
+    const response = await searchPokemon(query);
+    setPokemonFound(response.data);
+    setLoadingSearch(false);
+  }
   
   return (
     <div className="bg-chillyellow">
@@ -27,27 +32,33 @@ export default function Home() {
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"></link>
       </Head>
 
-      <Layout>
+      <Header getPokemon={getPokemon} />
+      
+      <main>
 
-        <Pagination>
-          <h1 className="title text-center align-self-center">
-            <img src="https://fontmeme.com/permalink/210408/cb4df7d3269ce2ac42c1a819824138d4.png" alt="Home" border="0"/ >
-          </h1>
-        </Pagination>
+        <h1 className="title text-center align-self-center">
+          <img src="https://fontmeme.com/permalink/210408/cb4df7d3269ce2ac42c1a819824138d4.png" alt="Home" border="0"/ >
+        </h1>
 
-        <div className="d-flex flex-wrap justify-content-evenly" id="list">
-          { 
-            pokemons.map((pokemon, index) => {
-              return (
-                <Card key={index} name={ pokemon.name } image={`${BASE_API_PRODUCTS_IMAGE}${index+1}.png`} detail={ pokemon.url } id={ index+1 } />
-              )
-            })
+        <div className="d-flex flex-wrap justify-content-evenly mt-4" id="list">
+          
+          {
+            (!loadingSearch && pokemonFound) ? (
+              <Card key={index} name={ pokemonFound.name } image={`${ POKEMON_IMAGE_URL }${ pokemonFound.id }.png`} detail={ `https://pokeapi.co/api/v2/pokemon/${pokemonFound.id}` } id={ pokemonFound.id } />
+            ) : (
+              pokemons.map((pokemon, index) => {
+                return (
+                  <Card key={index} name={ pokemon.name } image={`${ POKEMON_IMAGE_URL }${ index+1 }.png`} detail={ pokemon.url } id={ index+1 } />
+                )
+              })
+            )
           }
+
         </div>
 
-        <Pagination page={ page } preview={ previousPage } next={ nextPage } />
+      </main>
 
-      </Layout>
+      <Footer />
 
     </div>
   )
