@@ -18,7 +18,7 @@ const Header = props => {
 
                 <Form className="d-inline-flex align-items-center">
                     <Form.Control onChange={(e) => setSearch(e.target.value)} placeholder="Search Pokemon" />
-                    <Button block  onClick={(e) => props.getPokemon(search)} className="btn text-dark poke-button">
+                    <Button block onClick={(e) => props.getPokemon(search)} className="btn text-dark poke-button">
                         <img className="flip" src="/static/icons/search.png" alt="Home" style={{width: '1rem', height: '1rem'}} />
                     </Button>            
                 </Form>

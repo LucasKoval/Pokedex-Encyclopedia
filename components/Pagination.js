@@ -16,7 +16,7 @@ const Pagination = props => {
                         <li className="page-item prev-button-low">
                             <button className="page-button bg-chillyellow zoom-in border-0 previous mt-2" aria-label="Previous">
                                 <span aria-hidden="true" style={{paddingLeft: '2px', paddingRight: '2px'}}> 
-                                    <Link href={`/detail?id=${id > 1 ? id - 1 : 1}`}>
+                                    <Link href={`/detail?id=${id > 1 ? id - 1 : 151}`}>
                                         <a className="nav-link bg-lightgrey p-4 rounded-1">
                                             <img src="/static/icons/a-prev.png" alt="Preview" border="0" />
                                         </a>
@@ -38,7 +38,7 @@ const Pagination = props => {
                         <li className="page-item ms-2">
                             <button className="page-button bg-chillyellow zoom-in border-0 next mt-2" aria-label="Next">
                                 <span aria-hidden="true" style={{paddingLeft: '2px', paddingRight: '2px'}}>
-                                    <Link href={`/detail?id=${id < 151 ? id + 1 : 151}`}>
+                                    <Link href={`/detail?id=${id < 151 ? id + 1 : 1}`}>
                                         <a className="nav-link bg-lightgrey p-4 rounded-1">
                                             <img src="/static/icons/a-next.png" alt="Next" border="0" />
                                         </a>

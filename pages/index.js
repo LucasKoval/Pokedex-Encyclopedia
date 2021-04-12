@@ -10,8 +10,10 @@ export default function Home({pokemons}) {
   const [loadingSearch, setLoadingSearch] = useState(false);
   const getPokemon = async (query) => {
     setLoadingSearch(true);
-    const response = await searchPokemon(query);
-    setPokemonFound(response.data);
+    if (query != '') {
+      const response = await searchPokemon(query);
+      setPokemonFound(response.data);
+    }
     setLoadingSearch(false);
   }
   
@@ -28,7 +30,7 @@ export default function Home({pokemons}) {
         <div className="d-flex flex-wrap justify-content-evenly mt-4" id="list">
           {
             (!loadingSearch && pokemonFound) ? (
-              <div className="d-flex w-100 justify-content-center">
+              <div className="d-flex w-100 pb-5 justify-content-center">
                 <Card name={pokemonFound.name} image={`${POKEMON_IMAGE_URL}${pokemonFound.id}.png`} detail={pokemonFound.url} id={pokemonFound.id} />
               </div>
             ) : ( null )        
