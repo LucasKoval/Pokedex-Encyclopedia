@@ -2,11 +2,8 @@ import React from 'react';
 
 const Loader = () => {
     return (
-        <div className="spinner-grow text-danger" role="status">
-            <span className="sr-only"></span>
-        </div>
+        <div class="loader loader-pokeball is-active"></div>
     );
 }
 
 export default Loader;
-

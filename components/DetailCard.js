@@ -1,27 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router'
-import { POKEMON_IMAGE_URL } from '../config/baseURL';
+import React from 'react';
 import Loader from '../components/Loader';
-import useFetchOne from '../hooks/useFetchOne';
+import useLoader from '../hooks/useLoader';
 
-const DetailCard = (props) => {
-    const router = useRouter()
-    const id = router.query.id
-    const { dataPkm, loadingPkm, errorPkm } = useFetchOne();
-    if (loadingPkm) return <Loader />;
-    if (errorPkm) return "Error!";
+const DetailCard = props => {
+    const { loading } = useLoader();
+    if (loading) return <Loader />;
 
     return (
         <div className="card p-4 border-groove max-size bg-light">
             <div className="row justify-content-evenly g-0">
-                
+            
                 <div className="col-md-4">
-                    <img className="w-100" src={`${ POKEMON_IMAGE_URL }${ id }.png`} alt="Pokemon" />
+                    <img className="w-100" src={props.image} alt="pokemon" />
                 </div>
                 
                 <div className="col-md-6">
                     <div className="card-body">
-                        <h2 className="card-title text-uppercase">{ dataPkm.name } | #{ dataPkm.id }</h2>
+                        
+                        <h2 className="card-title text-uppercase">{props.name} | #{props.id}</h2>
+                        
                         <div className="container">
                             <div className="row">
                                 
@@ -29,12 +26,12 @@ const DetailCard = (props) => {
                                     
                                     <div className="col-6 col-sm-3">
                                         <div className="fw-bold text-secondary">Height </div>
-                                        <div>{ dataPkm.height * 10 } cm</div>
+                                        <div>{props.height} cm</div>
                                     </div>
 
                                     <div className="col-6 col-sm-3">
                                         <div className="fw-bold text-secondary">Type </div>
-                                        <div className="btn bg-lightgrey text-capitalize"> { dataPkm.types[0].type.name }</div>
+                                        <div className="btn bg-lightgrey text-capitalize"> {props.type}</div>
                                     </div>
 
                                 </div>
@@ -45,12 +42,12 @@ const DetailCard = (props) => {
                                     
                                     <div className="col-6 col-sm-3 ">
                                         <div className="fw-bold text-secondary">Weight </div>
-                                        <div>{ dataPkm.weight / 10 } kg</div>
+                                        <div>{props.weight} kg</div>
                                     </div>
 
                                     <div className="col-6 col-sm-3 ">
                                         <div className="fw-bold text-secondary">Abilities </div>
-                                        <div className="text-capitalize">{ dataPkm.abilities[0].ability.name }</div>
+                                        <div className="text-capitalize">{props.ability}</div>
                                     </div>
                                     
                                 </div>
