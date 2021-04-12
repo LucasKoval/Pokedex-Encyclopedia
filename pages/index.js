@@ -19,7 +19,7 @@ export default function Home({pokemons}) {
   return (
     <div>
       <Head>
-          <title className="text-capitalize">Index</title>
+          <title className="text-capitalize">Pokedex Challenge | HOME</title>
           <link rel="icon" href="/static/icons/pokeball-2.png" />
           <html lang="en" />
           <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"></link>
