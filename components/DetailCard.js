@@ -1,6 +1,7 @@
 import React from 'react';
 import Loader from '../components/Loader';
 import useLoader from '../hooks/useLoader';
+import typeColors from '../utils/typeColors';
 
 const DetailCard = props => {
     const { loading } = useLoader();
@@ -31,7 +32,13 @@ const DetailCard = props => {
 
                                     <div className="col-6 col-sm-3">
                                         <div className="fw-bold text-secondary">Type </div>
-                                        <div className="btn bg-lightgrey text-capitalize"> {props.type}</div>
+                                        {
+                                            props.type.map(type => {
+                                                return (
+                                                    <div className="btn m-1 text-capitalize" style={{ backgroundColor: typeColors[type.type.name] }}>{type.type.name}</div>
+                                                )
+                                            })
+                                        }
                                     </div>
 
                                 </div>
@@ -64,3 +71,5 @@ const DetailCard = props => {
 }
 
 export default DetailCard;
+
+
