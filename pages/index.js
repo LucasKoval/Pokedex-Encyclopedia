@@ -1,20 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
-import { POKEMON_IMAGE_URL } from '../config/baseURL';
-import useFetchAll from '../hooks/useFetchAll';
+import React, { useState } from 'react';
+import { BASE_API_URL, POKEMON_IMAGE_URL, query } from '../config/baseURL';
 import searchPokemon from '../utils/searchPokemon';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Loader from '../components/Loader';
+import Layout from '../components/Layout';
 import Card from '../components/Card'
 
-export default function Home() {
+export default function Home({pokemons}) {
   const [pokemonFound, setPokemonFound] = useState();
   const [loadingSearch, setLoadingSearch] = useState(false);
-  const { pokemons, loading, error } = useFetchAll();
-  if (loading) return <Loader />;
-  if (error) return "Error!";
-
   const getPokemon = async (query) => {
     setLoadingSearch(true);
     const response = await searchPokemon(query);
@@ -23,43 +15,47 @@ export default function Home() {
   }
   
   return (
-    <div className="bg-chillyellow">
-      
-      <Head>
-        <title>Pokedex Challenge</title>
-        <link rel="icon" href="/static/icons/pokeball-2.png" />
-        <html lang="en" />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"></link>
-      </Head>
+    <Layout title="Pokedex Challenge">
 
-      <Header getPokemon={getPokemon} />
-      
-      <main>
+      <h1 className="title text-center align-self-center">
+        <img src="https://fontmeme.com/permalink/210408/cb4df7d3269ce2ac42c1a819824138d4.png" alt="Home" border="0"/ >
+      </h1>
 
-        <h1 className="title text-center align-self-center">
-          <img src="https://fontmeme.com/permalink/210408/cb4df7d3269ce2ac42c1a819824138d4.png" alt="Home" border="0"/ >
-        </h1>
+      <div className="d-flex flex-wrap justify-content-evenly mt-4" id="list">
+        {
+          (!loadingSearch && pokemonFound) ? (
+            <Card name={pokemon.name} image={pokemon.image} detail={pokemon.url} id={pokemon.id} />
+          ) : (
+            pokemons.map((pokemon, index) => {
+              return (
+                <Card key={index} name={pokemon.name} image={pokemon.image} detail={pokemon.url} id={pokemon.id} />
+              )
+            })
+          )
+        }
+      </div>
 
-        <div className="d-flex flex-wrap justify-content-evenly mt-4" id="list">
-          
-          {
-            (!loadingSearch && pokemonFound) ? (
-              <Card key={index} name={ pokemonFound.name } image={`${ POKEMON_IMAGE_URL }${ pokemonFound.id }.png`} detail={ `https://pokeapi.co/api/v2/pokemon/${pokemonFound.id}` } id={ pokemonFound.id } />
-            ) : (
-              pokemons.map((pokemon, index) => {
-                return (
-                  <Card key={index} name={ pokemon.name } image={`${ POKEMON_IMAGE_URL }${ index+1 }.png`} detail={ pokemon.url } id={ index+1 } />
-                )
-              })
-            )
-          }
-
-        </div>
-
-      </main>
-
-      <Footer />
-
-    </div>
+    </Layout>
   )
+}
+
+export async function getStaticProps(context) {
+  try {
+    const response = await fetch(`${BASE_API_URL}${query.pokemon}${query.all}`);
+    const { results } = await response.json();
+    const pokemons = results.map((pokemon, index) => {
+      const id = index+1;
+      const image = `${POKEMON_IMAGE_URL}${id}.png`;
+      return {
+        id,
+        ...pokemon,
+        image,
+      };
+    }) 
+    return {
+      props: { pokemons }
+    }
+  } catch (err) {
+    console.error(err);
+  }
 }

@@ -3,7 +3,6 @@ import React from 'react';
 const Footer = () => {
     return (
         <footer className="shadow-lg">
-
             <nav className="navbar py-4 mt-5 bg-chillblue text-white justify-content-around">
 
                 <div className="flip py-3">
@@ -41,9 +40,6 @@ const Footer = () => {
                 </div>
 
             </nav>
-
-           
-
         </footer>
     );
 }
