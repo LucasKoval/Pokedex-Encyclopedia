@@ -3,16 +3,19 @@ import { BASE_API_URL, POKEMON_IMAGE_URL, query } from '../config/baseURL';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
 import Card from '../components/Card'
-import searchPokemon from '../utils/searchPokemon';
 
 export default function Home({pokemons}) {
   const [pokemonFound, setPokemonFound] = useState();
   const [loadingSearch, setLoadingSearch] = useState(false);
   const getPokemon = async (query) => {
     setLoadingSearch(true);
-    if (query != '') {
-      const response = await searchPokemon(query);
-      setPokemonFound(response.data);
+    if (query == '') {
+      setPokemonFound(pokemons)
+    } else {
+      const filter = await pokemons.filter(pokemon => {
+        return pokemon.name.includes(query)
+      })
+      setPokemonFound(filter)
     }
     setLoadingSearch(false);
   }
@@ -30,17 +33,20 @@ export default function Home({pokemons}) {
         <div className="d-flex flex-wrap justify-content-evenly mt-4" id="list">
           {
             (!loadingSearch && pokemonFound) ? (
-              <div className="d-flex w-100 pb-5 justify-content-center">
-                <Card name={pokemonFound.name} image={`${POKEMON_IMAGE_URL}${pokemonFound.id}.png`} detail={pokemonFound.url} id={pokemonFound.id} />
-              </div>
-            ) : ( null )        
-          }
-          {
-            pokemons.map((pokemon, index) => {
-              return (
-                <Card key={index} name={pokemon.name} image={pokemon.image} detail={pokemon.url} id={pokemon.id} />
-              )
-            })
+              pokemonFound.map((pokemon, index) => {
+                return (
+                  <div className="d-flex pb-5 justify-content-between">
+                    <Card key={index} name={pokemon.name} image={pokemon.image} detail={pokemon.url} id={pokemon.id} />
+                  </div>
+                )
+              })
+            ) : (
+              pokemons.map((pokemon, index) => {
+                return (
+                    <Card key={index} name={pokemon.name} image={pokemon.image} detail={pokemon.url} id={pokemon.id} />
+                )
+              })
+            )        
           }
 
         </div>
