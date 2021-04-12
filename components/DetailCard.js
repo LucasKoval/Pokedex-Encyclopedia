@@ -35,7 +35,7 @@ const DetailCard = props => {
                                         {
                                             props.type.map((type, index) => {
                                                 return (
-                                                    <div key={index} className="btn m-1 text-capitalize" style={{ backgroundColor: typeColors[type.type.name] }}>{type.type.name}</div>
+                                                    <div key={index} className="btn m-1 border border-dark text-capitalize" style={{ backgroundColor: typeColors[type.type.name] }}>{type.type.name}</div>
                                                 )
                                             })
                                         }
