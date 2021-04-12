@@ -1,6 +1,5 @@
 import React from 'react';
 import Layout from '../components/Layout';
-import Head from 'next/head';
 import Link from 'next/link';
 import { POKEMON_IMAGE_URL } from '../config/baseURL';
 import Header from '../components/Header';
@@ -10,14 +9,6 @@ import DetailCard from '../components/DetailCard'
 export default function detail({pokemon}) {
     return (
         <div>
-            <Head>
-                <title className="text-capitalize">Pokedex Challenge | DETAIL</title>
-                <link rel="icon" href="/static/icons/pokeball-2.png" />
-                <html lang="en" />
-                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"></link>
-                <link href="/static/css/app.css" rel="stylesheet" />
-            </Head>
-
             <Header />
 
             <Layout title={`Detail: ${pokemon.name}`}>

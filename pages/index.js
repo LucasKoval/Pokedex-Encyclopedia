@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { BASE_API_URL, POKEMON_IMAGE_URL, query } from '../config/baseURL';
-import Head from 'next/head';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
 import Card from '../components/Card'
@@ -18,14 +17,6 @@ export default function Home({pokemons}) {
   
   return (
     <div>
-      <Head>
-          <title className="text-capitalize">Pokedex Challenge | HOME</title>
-          <link rel="icon" href="/static/icons/pokeball-2.png" />
-          <html lang="en" />
-          <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"></link>
-          <link href="/static/css/app.css" rel="stylesheet" />
-      </Head>
-
       <Header getPokemon={getPokemon} />
 
       <Layout>
