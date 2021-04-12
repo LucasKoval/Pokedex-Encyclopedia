@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BASE_API_URL, POKEMON_IMAGE_URL, query } from '../config/baseURL';
+import { Button } from 'react-bootstrap';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
 import Card from '../components/Card'
@@ -19,6 +20,12 @@ export default function Home({pokemons}) {
     }
     setLoadingSearch(false);
   }
+
+  const getAllPokemon = () => {
+    setLoadingSearch(true);
+    setPokemonFound(pokemons)
+    setLoadingSearch(false);
+  }
   
   return (
     <div>
@@ -29,6 +36,10 @@ export default function Home({pokemons}) {
         <h1 className="title text-center align-self-center">
           <img src="https://fontmeme.com/permalink/210408/cb4df7d3269ce2ac42c1a819824138d4.png" alt="Home" border="0"/ >
         </h1>
+
+        <div className="d-flex justify-content-center pt-4 pb-2">
+          <Button block onClick={(e) => getAllPokemon()} className="btn poke-button text-dark fw-bold">Clean Filter</Button>
+        </div>
 
         <div className="d-flex flex-wrap justify-content-evenly mt-4" id="list">
           {
