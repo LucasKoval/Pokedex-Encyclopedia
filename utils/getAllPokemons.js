@@ -13,7 +13,7 @@ export default async function getAllPokemons(){
                 id,
                 number,
                 ...pokemon,
-                image,
+                image
             };
         }) 
         return {
