@@ -17,7 +17,7 @@ export default function detail({pokemon}) {
     const getPokemon = async (query) => {
         setLoading(true);
         if (query != '') {
-            const response = await searchPokemon(query);
+            const response = await searchPokemon(query.toLowerCase());
             setPoke(response.data);
             router.query.id = response.data.id
         }

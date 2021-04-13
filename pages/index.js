@@ -14,7 +14,7 @@ export default function Home({pokemons}) {
       setPokemonFound(pokemons)
     } else {
       const filter = await pokemons.filter(pokemon => {
-        return pokemon.name.includes(query)
+        return pokemon.name.includes(query.toLowerCase())
       })
       setPokemonFound(filter)
     }
