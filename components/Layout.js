@@ -4,13 +4,10 @@ import Footer from './Footer';
 const Layout = ({ children }) => {
     return (
         <div className="bg-chillyellow">
-
             <main>
                 {children}
             </main>
-
-            <Footer />
-            
+            <Footer/>
         </div>
     );
 }

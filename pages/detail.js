@@ -4,10 +4,10 @@ import Link from 'next/link';
 import getPokemon from '../utils/getPokemon'
 import { POKEMON_IMAGE_URL } from '../config/baseURL';
 import Header from '../components/Header';
-import Pagination from '../components/Pagination'
-import DetailCard from '../components/DetailCard'
+import Pagination from '../components/Pagination';
+import DetailCard from '../components/DetailCard';
 import apiCall from '../utils/apiCall';
-import {useRouter} from 'next/router'
+import {useRouter} from 'next/router';
 
 export default function detail({ pokemon }) {
     const router = useRouter();
@@ -20,7 +20,7 @@ export default function detail({ pokemon }) {
         if (query != '') {
             const response = await apiCall(query.toLowerCase());
             setPoke(response.data);
-            router.query.id = response.data.id
+            router.query.id = response.data.id;
         }
         setLoading(false);
     }
@@ -33,25 +33,22 @@ export default function detail({ pokemon }) {
             const image = `${POKEMON_IMAGE_URL}${id}.png`;
             pokemon.number = number;
             pokemon.image = image;
-            setPoke(pokemon)
+            setPoke(pokemon);
         } catch (err) {
             console.error(`Error fetching the API: ${err}`);
             throw err;
         }
-    }, [id])
+    }, [id]);
 
     return (
         <div>
-            <Header searchPokemon={searchPokemon} />
-
+            <Header searchPokemon={searchPokemon}/>
             <Layout title={`Detail: ${pokemon.name}`}>
-
                 <Pagination>
                     <h1 className="title text-center align-self-center">
-                        <img src="https://fontmeme.com/permalink/210408/7c0325945d8350a0ed0187b3db446e0b.png" alt="Detail" border="0" />
+                        <img src="https://fontmeme.com/permalink/210408/7c0325945d8350a0ed0187b3db446e0b.png" alt="Detail" border="0"/>
                     </h1>
                 </Pagination>
-
                 <div className="d-flex justify-content-center mb-3">
                     <Link href="/">
                         <a className="nav-link">
@@ -59,10 +56,8 @@ export default function detail({ pokemon }) {
                         </a>
                     </Link>                  
                 </div>
-
                 <div className="d-flex justify-content-center">
-                    {
-                    <DetailCard
+                    {<DetailCard
                         id={poke.id}
                         number={poke.number}
                         name={poke.name}
@@ -71,13 +66,10 @@ export default function detail({ pokemon }) {
                         weight={poke.weight / 10}
                         type={poke.types}
                         ability={poke.abilities[0].ability.name}
-                    />
-                    }              
+                    />}            
                 </div>
-
             </Layout>
         </div>
-        
     )
 }
 
