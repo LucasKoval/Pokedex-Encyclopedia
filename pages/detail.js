@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import Link from 'next/link';
+import getPokemon from '../utils/getPokemon'
 import { POKEMON_IMAGE_URL } from '../config/baseURL';
 import Header from '../components/Header';
 import Pagination from '../components/Pagination'
 import DetailCard from '../components/DetailCard'
-import searchPokemon from '../utils/searchPokemon';
+import apiCall from '../utils/apiCall';
 import {useRouter} from 'next/router'
 
-export default function detail({pokemon}) {
+export default function detail({ pokemon }) {
     const router = useRouter();
     const {id} = router.query;
     const [poke, setPoke] = useState(pokemon);
     const [loading, setLoading] = useState(false);
 
-    const getPokemon = async (query) => {
+    const searchPokemon = async (query) => {
         setLoading(true);
         if (query != '') {
-            const response = await searchPokemon(query.toLowerCase());
+            const response = await apiCall(query.toLowerCase());
             setPoke(response.data);
             router.query.id = response.data.id
         }
@@ -28,7 +29,9 @@ export default function detail({pokemon}) {
         try {
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
             const pokemon = await response.json();
+            const number = ('00' + id).slice(-3);
             const image = `${POKEMON_IMAGE_URL}${id}.png`;
+            pokemon.number = number;
             pokemon.image = image;
             setPoke(pokemon)
         } catch (err) {
@@ -39,7 +42,7 @@ export default function detail({pokemon}) {
 
     return (
         <div>
-            <Header getPokemon={getPokemon} />
+            <Header searchPokemon={searchPokemon} />
 
             <Layout title={`Detail: ${pokemon.name}`}>
 
@@ -61,6 +64,7 @@ export default function detail({pokemon}) {
                     {
                     <DetailCard
                         id={poke.id}
+                        number={poke.number}
                         name={poke.name}
                         image={`${POKEMON_IMAGE_URL}${poke.id}.png`}
                         height={poke.height * 10}
@@ -77,18 +81,6 @@ export default function detail({pokemon}) {
     )
 }
 
-export async function getServerSideProps({query}) {
-    const id = query.id;
-    try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-        const pokemon = await response.json();
-        const image = `${POKEMON_IMAGE_URL}${id}.png`;
-        pokemon.image = image;        
-        return {
-            props: { pokemon },
-        }
-    } catch (err) {
-        console.error(`Error fetching the API: ${err}`);
-        throw err;
-    }
+export async function getServerSideProps({query}){
+    return getPokemon(query)
 }

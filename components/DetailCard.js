@@ -18,7 +18,7 @@ const DetailCard = props => {
                 <div className="col-md-6">
                     <div className="card-body">
                         
-                        <h2 className="card-title text-uppercase">{props.name} | #{props.id}</h2>
+                        <h2 className="card-title text-uppercase">{props.name} | #{props.number}</h2>
                         
                         <div className="container">
                             <div className="row">

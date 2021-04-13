@@ -10,7 +10,7 @@ export default class CustomDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <title className="text-capitalize">Pokedex Challenge | HOME</title>
+                    <title className="text-capitalize">Pokedex Challenge</title>
                     <link rel="icon" href="/static/icons/pokeball-2.png" />
                     <html lang="en" />
                     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"></link>

@@ -1,35 +1,36 @@
 import React, { useState } from 'react';
-import { BASE_API_URL, POKEMON_IMAGE_URL, query } from '../config/baseURL';
 import { Button } from 'react-bootstrap';
+import getAllPokemons from '../utils/getAllPokemons'
 import Header from '../components/Header';
 import Layout from '../components/Layout';
 import Card from '../components/Card'
 
 export default function Home({pokemons}) {
-  const [pokemonFound, setPokemonFound] = useState();
+  const [searchResults, setSearchResults] = useState();
   const [loadingSearch, setLoadingSearch] = useState(false);
-  const getPokemon = async (query) => {
+  
+  const searchPokemon = async (query) => {
     setLoadingSearch(true);
     if (query == '') {
-      setPokemonFound(pokemons)
+      setSearchResults(pokemons)
     } else {
       const filter = await pokemons.filter(pokemon => {
         return pokemon.name.includes(query.toLowerCase())
       })
-      setPokemonFound(filter)
+      setSearchResults(filter)
     }
     setLoadingSearch(false);
   }
 
-  const getAllPokemon = () => {
+  const cleanFilter = () => {
     setLoadingSearch(true);
-    setPokemonFound(pokemons)
+    setSearchResults(pokemons)
     setLoadingSearch(false);
   }
   
   return (
     <div>
-      <Header getPokemon={getPokemon} />
+      <Header searchPokemon={searchPokemon} />
 
       <Layout>
 
@@ -38,13 +39,13 @@ export default function Home({pokemons}) {
         </h1>
 
         <div className="d-flex justify-content-center pt-4 pb-2">
-          <Button block onClick={(e) => getAllPokemon()} className="btn poke-button text-dark fw-bold">Clean Filter</Button>
+          <Button block onClick={(e) => cleanFilter()} className="btn poke-button text-dark fw-bold">Clean Filter</Button>
         </div>
 
         <div className="d-flex flex-wrap justify-content-evenly mt-4" id="list">
           {
-            (!loadingSearch && pokemonFound) ? (
-              pokemonFound.map((pokemon, index) => {
+            (!loadingSearch && searchResults) ? (
+              searchResults.map((pokemon, index) => {
                 return (
                   <div className="d-flex pb-5 justify-content-between">
                     <Card key={index} name={pokemon.name} image={pokemon.image} detail={pokemon.url} id={pokemon.id} />
@@ -54,7 +55,7 @@ export default function Home({pokemons}) {
             ) : (
               pokemons.map((pokemon, index) => {
                 return (
-                    <Card key={index} name={pokemon.name} image={pokemon.image} detail={pokemon.url} id={pokemon.id} />
+                  <Card key={index} id={pokemon.id} number={pokemon.number} name={pokemon.name} image={pokemon.image} detail={pokemon.url} />
                 )
               })
             )        
@@ -69,22 +70,5 @@ export default function Home({pokemons}) {
 }
 
 export async function getStaticProps(context) {
-  try {
-    const response = await fetch(`${BASE_API_URL}${query.pokemon}${query.all}`);
-    const { results } = await response.json();
-    const pokemons = results.map((pokemon, index) => {
-      const id = index+1;
-      const image = `${POKEMON_IMAGE_URL}${id}.png`;
-      return {
-        id,
-        ...pokemon,
-        image,
-      };
-    }) 
-    return {
-      props: { pokemons }
-    }
-  } catch (err) {
-    console.error(err);
-  }
+  return getAllPokemons();
 }
