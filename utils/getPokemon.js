@@ -1,10 +1,10 @@
-import { BASE_API_URL, POKEMON_IMAGE_URL, queries } from '../config/baseURL';
+import { BASE_API_URL, POKEMON_IMAGE_URL, QUERIES } from '../config/baseURL';
 
 export default async function getPokemon(query){
     try {
         const id = query.id;
         const number = ('00' + id).slice(-3);
-        const response = await fetch(`${BASE_API_URL}${queries.pokemon}/${id}`);
+        const response = await fetch(`${BASE_API_URL}${QUERIES.pokemon}/${id}`);
         const pokemon = await response.json();
         const image = `${POKEMON_IMAGE_URL}${id}.png`;
         pokemon.number = number;    
