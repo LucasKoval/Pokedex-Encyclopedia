@@ -1,8 +1,8 @@
-import { BASE_API_URL, POKEMON_IMAGE_URL, queries } from '../config/baseURL';
+import { BASE_API_URL, POKEMON_IMAGE_URL, QUERIES } from '../config/baseURL';
 
 export default async function getAllPokemons(){
     try {
-        const response = await fetch(`${BASE_API_URL}${queries.pokemon}${queries.all}`);
+        const response = await fetch(`${BASE_API_URL}${QUERIES.pokemon}${QUERIES.all}`);
         const { results } = await response.json();
         const pokemons = results.map((pokemon, index) => {
             const key = index;

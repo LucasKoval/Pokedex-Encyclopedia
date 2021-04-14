@@ -1,31 +1,20 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
-import getAllPokemons from '../utils/getAllPokemons'
+import { Form, Button } from 'react-bootstrap';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
 import Card from '../components/Card';
+import getAllPokemons from '../utils/getAllPokemons';
 
 export default function Home({pokemons}) {
-  const [searchResults, setSearchResults] = useState();
-  const [loadingSearch, setLoadingSearch] = useState(false);
+  const [searchResults, setSearchResults] = useState(pokemons);
   
-  const searchPokemon = async (query) => {
-    setLoadingSearch(true);
-    if (query == '') {
-      setSearchResults(pokemons);
-    } else {
-      const filter = await pokemons.filter(pokemon => {
-        return pokemon.name.includes(query.toLowerCase());
-      })
-      setSearchResults(filter);
-    }
-    setLoadingSearch(false);
+  const searchPokemon = (e) =>{
+    const filter = pokemons.filter( pokemon => pokemon.name.includes(e.target.value.toLowerCase()))
+    setSearchResults(filter) 
   }
 
   const cleanFilter = () => {
-    setLoadingSearch(true);
     setSearchResults(pokemons);
-    setLoadingSearch(false);
   }
   
   return (
@@ -36,24 +25,19 @@ export default function Home({pokemons}) {
           <img src="https://fontmeme.com/permalink/210408/cb4df7d3269ce2ac42c1a819824138d4.png" alt="Home" border="0"/>
         </h1>
         <div className="d-flex justify-content-center pt-4 pb-2">
-          <Button block onClick={(e) => cleanFilter()} className="btn poke-button text-dark fw-bold">Clean Filter</Button>
+          <Form className="d-inline-flex align-items-center">
+            <Form.Control onChange={searchPokemon} placeholder="Search Pokemon"/>         
+          </Form>
+          <Button block onClick={cleanFilter} className="btn poke-button text-dark fw-bold">Clean Filter</Button>
         </div>
         <div className="d-flex flex-wrap justify-content-evenly mt-4" id="list">
-          {(!loadingSearch && searchResults) ? (
-            searchResults.map((pokemon, index) => {
-              return (
-                <div className="d-flex pb-5 justify-content-between">
-                  <Card key={index} id={pokemon.id} number={pokemon.number} name={pokemon.name} image={pokemon.image} detail={pokemon.url}/>
-                </div>
-              )
-            })
-          ) : (
-            pokemons.map((pokemon, index) => {
-              return (
+          {searchResults.map((pokemon, index) => {
+            return (
+              <div key={index} className="d-flex pb-5 justify-content-between">
                 <Card key={index} id={pokemon.id} number={pokemon.number} name={pokemon.name} image={pokemon.image} detail={pokemon.url}/>
-              )
-            })
-          )}       
+              </div>
+            )
+          })}      
         </div>
       </Layout>
     </div>
