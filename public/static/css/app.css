@@ -35,7 +35,6 @@ main {
 
 .poke-size {
   width: 296px;
-  height: 296px;
 }
 
 .max-size {
@@ -45,6 +44,21 @@ main {
 .banner-pk {
   width: 85%;
   min-width: 288px;
+}
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 360px;
+  margin: auto;
+}
+
+.meme-font {
+  color: white;
+  font-size: 33px;
+  font-weight: 900;
+  -webkit-text-stroke: 2px black;
 }
 
 /*=== Colors ===*/

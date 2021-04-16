@@ -31,8 +31,8 @@ export default function detail({ pokemon }) {
                         image={pokemon.image}
                         height={pokemon.height * 10}
                         weight={pokemon.weight / 10}
-                        type={pokemon.types}
-                        ability={pokemon.abilities[0].ability.name}
+                        types={pokemon.types}
+                        abilities={pokemon.abilities}
                     />}            
                 </div>
             </Layout>
