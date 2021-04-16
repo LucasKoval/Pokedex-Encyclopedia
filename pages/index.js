@@ -7,10 +7,12 @@ import getAllPokemons from '../utils/getAllPokemons';
 
 export default function Home({pokemons}) {
   const [searchResults, setSearchResults] = useState(pokemons);
+  const [filterResults, setFilterResults] = useState(true);
   
   const searchPokemon = (e) =>{
-    const filter = pokemons.filter( pokemon => pokemon.name.includes(e.target.value.toLowerCase()))
-    setSearchResults(filter) 
+    const filter = pokemons.filter( pokemon => pokemon.name.includes(e.target.value.toLowerCase()));
+    setFilterResults(filter.length == 0 ? false : true);
+    setSearchResults(filter);
   }
 
   const cleanFilter = () => {
@@ -38,6 +40,10 @@ export default function Home({pokemons}) {
               </div>
             )
           })}      
+        </div>
+        <div className={filterResults ? 'd-none' : 'not-found'}>
+          <h2 className='meme-font'>VAMO A CALMARNO Y BUSCA DE NUEVO...</h2>
+          <img src='/static/img/notFound.png'></img>
         </div>
       </Layout>
     </div>
