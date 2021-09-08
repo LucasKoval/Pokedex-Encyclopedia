@@ -63,7 +63,7 @@ main {
 
 /*=== Colors ===*/
 .bg-lightgrey {
-  background-color: lightgrey;
+  background-color: #f2f2f2;
 }
 .bg-pale {
   background-color: var(--pale);
