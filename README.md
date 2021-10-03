@@ -1,12 +1,14 @@
-# Pokedex Challenge (2021)
+# Pokedex Encyclopedia (2021)
 
-## `APP URL:`
+Developed by [Lucas Koval](https://lucaskovaldev.com/).
 
-[https://pokedex-challenge-lkdev.vercel.app/](https://pokedex-challenge-lkdev.vercel.app/)
+## `APP URL`
+
+[https://pokedex-lkdev.vercel.app/](https://pokedex-lkdev.vercel.app/)
 
 ## `Available Scripts`
 
-In the project directory, you can run:
+In the project root directory, you can run:
 
 ### `npm run dev`
 
@@ -16,7 +18,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm start`
+### `npm run build` then `npm start`
 
 Runs the app in the production mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
