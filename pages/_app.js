@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title className="text-capitalize">Pokedex Challenge</title>
+        <title className="text-capitalize">Pokedex Encyclopedia</title>
       </Head>
       <Component {...pageProps} />
     </>

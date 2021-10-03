@@ -13,7 +13,7 @@ const Footer = () => {
         </div>
         <div className="navbar bg-chillblue text-white">
           <div className="container-fluid justify-content-center mb-3">
-            <span className="mb-0 h5">Pokedex Challenge 2021</span>
+            <span className="mb-0 h5">Pokedex Encyclopedia 2021</span>
           </div>
           <div className="container-fluid justify-content-center mb-3">
             <span>Lucas Koval | Full Stack Developer</span>
